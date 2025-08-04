@@ -1,21 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Магазин Pixelbux</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Bux Shop</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-    h1 { color: #0088cc; }
-    button { padding: 10px 20px; margin: 10px; background-color: #0088cc; color: white; border: none; cursor: pointer; }
-    button:hover { background-color: #005f99; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #ff5722;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    input[type="number"] {
+      padding: 10px;
+      margin: 10px 0;
+      width: 200px;
+    }
+    button {
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ff5722;
+    }
   </style>
 </head>
 <body>
-  <h1>Купить Pixelbux</h1>
-  <p>Выбери количество Pixelbux:</p>
-  <button onclick="alert('Ты выбрал 100 Pixelbux! Переведи 50 руб на карту 2202-2080-0875-8196 и отправь скриншот с переводом в Telegram @korzhikus2015 для подтверждения.')">100 Pixelbux — 50 руб</button><br>
-  <button onclick="alert('Ты выбрал 500 Pixelbux! Переведи 250 руб на карту 2202-2080-0875-8196 и отправь скриншот с переводом в Telegram @korzhikus2015 для подтверждения.')">500 Pixelbux — 250 руб</button><br>
-  <button onclick="alert('Ты выбрал 1000 Pixelbux! Переведи 500 руб на карту 2202-2080-0875-8196 и отправь скриншот с переводом в Telegram @korzhikus2015 для подтверждения.')">1000 Pixelbux — 500 руб</button>
+<div class="container">
+  <h1>Pixel Bux Shop</h1>
+  <form id="purchase-form">
+    <label for="robux-amount">Введите количество Robux:</label>
+    <input type="number" id="robux-amount" required>
+    <button type="submit">Рассчитать стоимость</button>
+  </form>
+  <div id="result" class="result"></div>
+</div>
+<script src="https://cdn.telegram.org/js/telegram-web-app.js"></script>
+<script type="module">
+  document.getElementById('purchase-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const robuxAmount = parseInt(document.getElementById('robux-amount').value);
+    const pricePerRobux = 0.5;
+    const totalPrice = robuxAmount * pricePerRobux;
+
+    document.getElementById('result').innerHTML = `
+      <p>Сумма к оплате: ${totalPrice} рублей</p>
+      <p>Переведите эту сумму на карту: ХХХХ ХХХХ ХХХХ ХХХХ</p>
+      <button onclick="confirmPayment()">Подтвердить оплату</button>
+    `;
+  });
+
+  function confirmPayment() {
+    document.getElementById('result').innerHTML = `
+      <p>Спасибо за покупку! Robux будут доставлены в течение 7 дней.</p>
+    `;
+  }
+</script>
 </body>
 </html>
