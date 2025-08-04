@@ -73,6 +73,13 @@
     <button type="submit">Рассчитать стоимость</button>
   </form>
   <div id="result" class="result"></div>
+  <button onclick="showHistory()">История покупок</button>
+  <button onclick="applyPromo()">Применить промокод</button>
+  <button onclick="showProfile()">Личный кабинет</button>
+  <button onclick="showReferral()">Реферальная ссылка</button>
+  <button onclick="showSupport()">Поддержка</button>
+  <button onclick="showReview()">Оставить отзыв</button>
+  <button onclick="loginVk()">Авторизация через VK</button>
 </div>
 <script src="https://cdn.telegram.org/js/telegram-web-app.js"></script>
 <script type="module">
@@ -93,6 +100,41 @@
     document.getElementById('result').innerHTML = `
       <p>Спасибо за покупку! Robux будут доставлены в течение 7 дней.</p>
     `;
+  }
+
+  function showHistory() {
+    // Логика для отображения истории покупок
+    alert("Ваша история покупок:");
+  }
+
+  function applyPromo() {
+    // Логика для применения промокода
+    alert("Введите промокод:");
+  }
+
+  function showProfile() {
+    // Логика для отображения личного кабинета
+    alert("Ваш профиль:");
+  }
+
+  function showReferral() {
+    // Логика для отображения реферальной ссылки
+    alert("Ваша реферальная ссылка: https://example.com/ref/12345");
+  }
+
+  function showSupport() {
+    // Логика для чата поддержки
+    alert("Мы свяжемся с вами в ближайшее время.");
+  }
+
+  function showReview() {
+    // Логика для отзывов
+    alert("Оставьте отзыв:");
+  }
+
+  function loginVk() {
+    // Логика для авторизации через VK
+    alert("Авторизация через VK...");
   }
 </script>
 </body>
