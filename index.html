@@ -1,141 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <title>Магазин Robux</title>
   <meta charset="UTF-8">
-  <title>Pixel Bux Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
-      color: #333;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-image: linear-gradient(to bottom right, #ff5722, #ff9800);
-    }
-    .container {
-      max-width: 600px;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #ff5722;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    input[type="number"] {
-      padding: 10px;
-      margin: 10px 0;
-      width: 200px;
-      border-radius: 5px;
-      border: 1px solid #ff5722;
-      transition: all 0.3s ease-in-out;
-    }
-    input[type="number"]:focus {
-      border-color: #ff9800;
-      box-shadow: 0 0 5px #ff9800;
-    }
-    button {
-      background-color: #ff5722;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: all 0.3s ease-in-out;
-    }
-    button:hover {
-      background-color: #ff9800;
-      transform: scale(1.05);
-    }
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #ff5722;
-      text-align: center;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f0f0f0; }
+    h1 { color: #0088cc; }
+    input { padding: 10px; margin: 10px; width: 200px; }
+    button { padding: 10px 20px; background-color: #0088cc; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #005f99; }
+    #result { margin: 20px; font-size: 18px; }
   </style>
 </head>
 <body>
-<div class="container">
-  <h1>Pixel Bux Shop</h1>
-  <form id="purchase-form">
-    <label for="robux-amount">Введите количество Robux:</label>
-    <input type="number" id="robux-amount" required>
-    <button type="submit">Рассчитать стоимость</button>
-  </form>
-  <div id="result" class="result"></div>
-  <button onclick="showHistory()">История покупок</button>
-  <button onclick="applyPromo()">Применить промокод</button>
-  <button onclick="showProfile()">Личный кабинет</button>
-  <button onclick="showReferral()">Реферальная ссылка</button>
-  <button onclick="showSupport()">Поддержка</button>
-  <button onclick="showReview()">Оставить отзыв</button>
-  <button onclick="loginVk()">Авторизация через VK</button>
-</div>
-<script src="https://cdn.telegram.org/js/telegram-web-app.js"></script>
-<script type="module">
-  document.getElementById('purchase-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const robuxAmount = parseInt(document.getElementById('robux-amount').value);
-    const pricePerRobux = 0.5;
-    const totalPrice = robuxAmount * pricePerRobux;
-
-    document.getElementById('result').innerHTML = `
-      <p>Сумма к оплате: ${totalPrice} рублей</p>
-      <p>Переведите эту сумму на карту: 2202-2080-0875-8196</p>
-      <button onclick="confirmPayment()">Подтвердить оплату</button>
-    `;
-  });
-
-  function confirmPayment() {
-    document.getElementById('result').innerHTML = `
-      <p>Спасибо за покупку! Robux будут доставлены в течение 7 дней.</p>
-    `;
-  }
-
-  function showHistory() {
-    // Логика для отображения истории покупок
-    alert("Ваша история покупок:");
-  }
-
-  function applyPromo() {
-    // Логика для применения промокода
-    alert("Введите промокод:");
-  }
-
-  function showProfile() {
-    // Логика для отображения личного кабинета
-    alert("Ваш профиль:");
-  }
-
-  function showReferral() {
-    // Логика для отображения реферальной ссылки
-    alert("Ваша реферальная ссылка: https://example.com/ref/12345");
-  }
-
-  function showSupport() {
-    // Логика для чата поддержки
-    alert("Мы свяжемся с вами в ближайшее время.");
-  }
-
-  function showReview() {
-    // Логика для отзывов
-    alert("Оставьте отзыв:");
-  }
-
-  function loginVk() {
-    // Логика для авторизации через VK
-    alert("Авторизация через VK...");
-  }
-</script>
+  <h1>Купить Robux</h1>
+  <p>Введи количество Robux:</p>
+  <input type="number" id="robuxAmount" placeholder="Например, 100" min="1">
+  <button onclick="calculate()">Рассчитать стоимость</button>
+  <div id="result"></div>
+  <button id="confirmButton" style="display: none;" onclick="confirmPayment()">Подтвердить оплату</button>
+  <script>
+    function calculate() {
+      const robux = document.getElementById('robuxAmount').value;
+      if (robux < 1) {
+        alert('Введи количество Robux!');
+        return;
+      }
+      const cost = robux * 0.5; // 1 Robux = 50 копеек
+      document.getElementById('result').innerHTML = `Стоимость: ${cost} руб за ${robux} Robux`;
+      document.getElementById('confirmButton').style.display = 'block';
+    }
+    function confirmPayment() {
+      const robux = document.getElementById('robuxAmount').value;
+      const cost = robux * 0.5;
+      alert(`Переведи ${cost} руб на карту 2202-2080-0875-8196 и отправь скриншот оплаты @korzhikus2015 в Telegram.`);
+    }
+  </script>
 </body>
-</html> 
+</html>
