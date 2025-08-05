@@ -5,21 +5,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f0f0f0; }
-    h1 { color: #0088cc; }
-    input { padding: 10px; margin: 10px; width: 200px; }
-    button { padding: 10px 20px; background-color: #0088cc; color: white; border: none; cursor: pointer; }
-    button:hover { background-color: #005f99; }
-    #result { margin: 20px; font-size: 18px; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1a1a; /* Тёмный фон, как на сайтах Robux */
+      color: #ffffff;
+      margin: 0;
+    }
+    .header {
+      background-color: #00aaff; /* Яркий синий, как у Roblox */
+      padding: 10px;
+      border-bottom: 2px solid #ffffff;
+    }
+    .logo {
+      font-size: 40px;
+      font-weight: bold;
+      color: #ffcc00; /* Желтый цвет для логотипа */
+    }
+    .container {
+      max-width: 500px;
+      margin: 20px auto;
+      background-color: #2c2c2c; /* Серый фон контейнера */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0088cc;
+    }
+    #result {
+      margin: 20px;
+      font-size: 18px;
+    }
+    #confirmButton {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <h1>Купить Robux</h1>
-  <p>Введи количество Robux:</p>
-  <input type="number" id="robuxAmount" placeholder="Например, 100" min="1">
-  <button onclick="calculate()">Рассчитать стоимость</button>
-  <div id="result"></div>
-  <button id="confirmButton" style="display: none;" onclick="confirmPayment()">Подтвердить оплату</button>
+  <div class="header">
+    <div class="logo">Robux Shop</div> <!-- Простая замена логотипа текстом -->
+  </div>
+  <div class="container">
+    <h1>Купить Robux</h1>
+    <p>Введи количество Robux:</p>
+    <input type="number" id="robuxAmount" placeholder="Например, 100" min="1">
+    <button onclick="calculate()">Рассчитать стоимость</button>
+    <div id="result"></div>
+    <button id="confirmButton" onclick="confirmPayment()">Подтвердить оплату</button>
+  </div>
   <script>
     function calculate() {
       const robux = document.getElementById('robuxAmount').value;
