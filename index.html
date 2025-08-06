@@ -147,7 +147,7 @@
       const taxFactor = 1 / 0.7; // 30% налог
       const toSend = Math.ceil(amount * taxFactor); // Округляем вверх
       const cost = toSend * 0.5; // 1 Pixelbux = 50 копеек
-      document.getElementById('result').innerHTML = `Отправь ${toSend} Pixelbux, стоимость: ${cost} руб`;
+      document.getElementById('result').innerHTML = `Сделай Gamepass с ${toSend} Pixelbux, стоимость: ${cost} руб`;
       document.getElementById('confirmButton').style.display = 'block';
     }
     function confirmPayment() {
