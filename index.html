@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Магазин Robux</title>
+  <title>Pixelbux магазин</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -9,24 +9,25 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 20px;
-      background-color: #1a1a1a; /* Тёмный фон, как на сайтах Robux */
+      background-color: #006400; /* Зелёный фон */
       color: #ffffff;
       margin: 0;
     }
     .header {
-      background-color: #00aaff; /* Яркий синий, как у Roblox */
+      background-color: #228B22; /* Тёмно-зелёный для заголовка */
       padding: 10px;
       border-bottom: 2px solid #ffffff;
     }
     .logo {
       font-size: 40px;
       font-weight: bold;
-      color: #ffcc00; /* Желтый цвет для логотипа */
+      color: #FFD700; /* Жёлтая буква P */
+      text-shadow: 2px 2px 4px #000000; /* Эффект куба */
     }
     .container {
       max-width: 500px;
       margin: 20px auto;
-      background-color: #2c2c2c; /* Серый фон контейнера */
+      background-color: #2E8B57; /* Морская волна для контейнера */
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -37,17 +38,19 @@
       width: 200px;
       border: none;
       border-radius: 5px;
+      background-color: #ffffff;
+      color: #000000;
     }
     button {
       padding: 10px 20px;
-      background-color: #00aaff;
-      color: white;
+      background-color: #FFD700; /* Жёлтая кнопка */
+      color: #000000;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #0088cc;
+      background-color: #FFC107;
     }
     #result {
       margin: 20px;
@@ -60,31 +63,35 @@
 </head>
 <body>
   <div class="header">
-    <div class="logo">Robux Shop</div> <!-- Простая замена логотипа текстом -->
+    <div class="logo">P</div> <!-- Зеленый куб с жёлтой P -->
   </div>
   <div class="container">
-    <h1>Купить Robux</h1>
-    <p>Введи количество Robux:</p>
-    <input type="number" id="robuxAmount" placeholder="Например, 100" min="1">
+    <h1>Pixelbux магазин</h1>
+    <p>Введи количество Pixelbux, которое хочешь получить (с налогом 30%):</p>
+    <input type="number" id="pixelbuxAmount" placeholder="Например, 70" min="1">
     <button onclick="calculate()">Рассчитать стоимость</button>
     <div id="result"></div>
     <button id="confirmButton" onclick="confirmPayment()">Подтвердить оплату</button>
   </div>
   <script>
     function calculate() {
-      const robux = document.getElementById('robuxAmount').value;
-      if (robux < 1) {
-        alert('Введи количество Robux!');
+      const amount = document.getElementById('pixelbuxAmount').value;
+      if (amount < 1) {
+        alert('Введи количество Pixelbux!');
         return;
       }
-      const cost = robux * 0.5; // 1 Robux = 50 копеек
-      document.getElementById('result').innerHTML = `Стоимость: ${cost} руб за ${robux} Robux`;
+      const taxFactor = 1 / 0.7; // 30% налог, нужно отправить 1.4285 больше
+      const toSend = Math.ceil(amount * taxFactor); // Округляем вверх
+      const cost = toSend * 0.5; // 1 Pixelbux = 50 копеек
+      document.getElementById('result').innerHTML = `Отправь ${toSend} Pixelbux, стоимость: ${cost} руб`;
       document.getElementById('confirmButton').style.display = 'block';
     }
     function confirmPayment() {
-      const robux = document.getElementById('robuxAmount').value;
-      const cost = robux * 0.5;
-      alert(`Переведи ${cost} руб на карту 2202-2080-0875-8196 и отправь скриншот оплаты @korzhikus2015 в Telegram.`);
+      const amount = document.getElementById('pixelbuxAmount').value;
+      const taxFactor = 1 / 0.7;
+      const toSend = Math.ceil(amount * taxFactor);
+      const cost = toSend * 0.5;
+      alert(`Переведи ${cost} руб на карту 2202-2080-0875-8196 и отправь скриншот @korzhikus2015. После оплаты — Gamepass на 7 дней.`);
     }
   </script>
 </body>
