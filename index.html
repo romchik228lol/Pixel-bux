@@ -1,63 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <title>Pixelbux магазин</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      padding: 20px;
-      background-color: #006400; /* Зелёный фон */
-      color: #ffffff;
       margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #006400, #228B22); /* Градиент зелёного */
+      min-height: 100vh;
+      color: #fff;
     }
     .header {
-      background-color: #228B22; /* Тёмно-зелёный для заголовка */
-      padding: 10px;
-      border-bottom: 2px solid #ffffff;
+      background: rgba(0, 100, 0, 0.8); /* Полупрозрачный зелёный */
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
     .logo {
-      font-size: 40px;
+      font-size: 60px;
       font-weight: bold;
-      color: #FFD700; /* Жёлтая буква P */
-      text-shadow: 2px 2px 4px #000000; /* Эффект куба */
+      color: #FFD700; /* Жёлтая P */
+      text-shadow: 3px 3px 6px #000000, 0 0 10px #FFD700; /* Эффект куба и свечения */
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
     .container {
-      max-width: 500px;
-      margin: 20px auto;
-      background-color: #2E8B57; /* Морская волна для контейнера */
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      margin: 40px auto;
+      background: rgba(46, 139, 87, 0.9); /* Морская волна с прозрачностью */
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #FFD700;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 15px;
     }
     input {
-      padding: 10px;
+      padding: 12px;
       margin: 10px;
-      width: 200px;
+      width: 250px;
       border: none;
-      border-radius: 5px;
-      background-color: #ffffff;
-      color: #000000;
+      border-radius: 8px;
+      font-size: 1.1em;
+      transition: transform 0.3s;
+    }
+    input:focus {
+      transform: scale(1.05);
+      outline: none;
+      box-shadow: 0 0 10px #FFD700;
     }
     button {
-      padding: 10px 20px;
-      background-color: #FFD700; /* Жёлтая кнопка */
+      padding: 12px 25px;
+      margin: 10px;
+      background: #FFD700;
       color: #000000;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 1.1em;
       cursor: pointer;
+      transition: all 0.3s;
     }
     button:hover {
-      background-color: #FFC107;
+      background: #FFC107;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
     #result {
-      margin: 20px;
-      font-size: 18px;
+      margin: 20px 0;
+      font-size: 1.3em;
+      color: #ffffff;
+      animation: slideUp 0.5s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     #confirmButton {
       display: none;
+      background: #228B22;
+      color: #fff;
+    }
+    #confirmButton:hover {
+      background: #006400;
+    }
+    .gamepass-link {
+      margin-top: 15px;
+      font-size: 1em;
+      color: #FFD700;
+      text-decoration: underline;
+    }
+    .gamepass-link a {
+      color: #FFD700;
+      text-decoration: none;
+    }
+    .gamepass-link a:hover {
+      color: #FFC107;
+    }
+    @media (max-width: 480px) {
+      .container { margin: 20px; padding: 15px; }
+      input { width: 180px; }
+      h1 { font-size: 2em; }
+      p { font-size: 1em; }
     }
   </style>
 </head>
@@ -72,6 +133,9 @@
     <button onclick="calculate()">Рассчитать стоимость</button>
     <div id="result"></div>
     <button id="confirmButton" onclick="confirmPayment()">Подтвердить оплату</button>
+    <div class="gamepass-link">
+      <p>Создай Gamepass для получения Pixelbux: <a href="https://create.roblox.com/dashboard/creations/experiences/7719991084/passes/create" target="_blank">Нажми здесь</a></p>
+    </div>
   </div>
   <script>
     function calculate() {
@@ -80,7 +144,7 @@
         alert('Введи количество Pixelbux!');
         return;
       }
-      const taxFactor = 1 / 0.7; // 30% налог, нужно отправить 1.4285 больше
+      const taxFactor = 1 / 0.7; // 30% налог
       const toSend = Math.ceil(amount * taxFactor); // Округляем вверх
       const cost = toSend * 0.5; // 1 Pixelbux = 50 копеек
       document.getElementById('result').innerHTML = `Отправь ${toSend} Pixelbux, стоимость: ${cost} руб`;
